@@ -105,12 +105,12 @@ void DreamConsole::HandleWriteCommand() {
   wstring text = L"";
   wchar_t* buffer = new wchar_t[TEXT_BUFFER_SIZE];
   while(bytesToRead > 0) {
-    memset(buffer, 0, TEXT_BUFFER_SIZE);
-    if(!ReadFile(_pipe, buffer, TEXT_BUFFER_SIZE * sizeof(wchar_t), &bytesRead, nullptr)) {
+    DWORD maxRead = TEXT_BUFFER_SIZE * sizeof(wchar_t) < bytesToRead ? TEXT_BUFFER_SIZE * sizeof(wchar_t) : bytesToRead;
+    //memset(buffer, 0, TEXT_BUFFER_SIZE * sizeof(wchar_t));
+    if(!ReadFile(_pipe, buffer, maxRead, &bytesRead, nullptr)) {
       _shouldLoop = false;
       return;
     }
-
     text += wstring(buffer, bytesRead / 2);
     bytesToRead -= bytesRead;
   }
