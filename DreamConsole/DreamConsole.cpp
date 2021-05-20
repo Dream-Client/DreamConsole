@@ -75,20 +75,17 @@ void DreamConsole::Loop() {
   while(_shouldLoop) {
     if(!Read<BYTE>(&command, &bytesRead) || bytesRead != sizeof(BYTE)) {
       _shouldLoop = false;
-      wcout << L"_shouldLoop = false" << endl;
       break;
     }
 
     switch((COMMANDS)command) {
     case COMMANDS::WRITE:
     {
-      wcout << L"Got write command" << endl;
       HandleWriteCommand();
       continue;
     }
     case COMMANDS::COLOR:
     {
-      wcout << L"Got color command" << endl;
       HandleColorCommand();
       continue;
     }
