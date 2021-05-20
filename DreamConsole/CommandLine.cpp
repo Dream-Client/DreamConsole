@@ -10,17 +10,17 @@ void CommandLine::Init() {
   int i;
 
   szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
-  if(NULL == szArglist) {
-    wcout << L"CommandLineToArgvW failed" << endl;
+  if(nullptr == szArglist) {
+    wcout << L"CommandLineToArgvW failed." << endl;
     return;
   }
   
   // First argument is path
-  for(i = 0; i < nArgs; i++) {
+  for(i = 1; i < nArgs; i++) {
 
     if(wcscmp(L"--pipe", szArglist[i]) == 0) {
       if(i + 1 >= nArgs) {
-        wcout << L"Pipe file name missing" << endl;
+        wcout << L"Pipe file name missing." << endl;
         goto END;
       }
 
