@@ -24,6 +24,7 @@ void DreamConsole::Run() {
   Loop();
 
   CloseHandle(_pipe);
+  ::ShowWindow(::GetConsoleWindow(), SW_SHOW);
 
   _logger << L"VRChat was closed or crashed";
   _logger << L"";
